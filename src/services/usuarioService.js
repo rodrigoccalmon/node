@@ -16,7 +16,8 @@ async function validarUsuario(email, senha) {
   if (!usuario || usuario.senha != senha) {
     throw new NaoAutorizadoErro(401, "Usuário ou senha inválidos. ");
   }
-  console.log();
+  let credencial = "";
+  return credencial;
 }
 
 module.exports = {
