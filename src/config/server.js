@@ -1,4 +1,5 @@
 require("dotenv").config();
+require('../database')
 /*
 require é como se fosse o import.
 require dotenv config ele vai importar tudo que tem no env e vai disponibilar para usar
