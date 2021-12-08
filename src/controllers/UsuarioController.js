@@ -10,6 +10,7 @@ class UsuarioController {
         throw new NaoAutorizadoErro(401, "Usuário ou senha inválidos. ");
       }
       let credencial = await usuarioService.validarUsuario(email, senha);
+      return res.json(credencial);
     } catch (error) {
       console.log(error);
     }
