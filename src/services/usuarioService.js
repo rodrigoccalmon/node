@@ -37,6 +37,7 @@ function _criarCredencial(usuario) {
   usuario.senha = undefined;
 
   credencial = { token, usuario, dataExpiracao };
+  usuarioCache.adicionarNoCache(credencial);
   return credencial;
 }
 
