@@ -40,7 +40,10 @@ function _criarCredencial(usuario) {
   usuarioCache.adicionarNoCache(credencial);
   return credencial;
 }
-
+async function logout(token) {
+  usuarioCache.removerNoCache(token);
+}
 module.exports = {
   validarUsuario,
+  logout,
 };

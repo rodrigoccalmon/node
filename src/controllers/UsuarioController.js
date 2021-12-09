@@ -15,6 +15,16 @@ class UsuarioController {
       console.log(error);
     }
   }
+
+  async logout(req, res){
+    try {
+      await usuarioService.logout(req.headers.authorization);
+    } catch (error) {
+      console.log(error)
+      return res.status(error.status).json(error);
+    }
+  }
+
   obter(req, res) {
     return res.json([{ id: 1, nome: "Rodrigo" }]);
   }
