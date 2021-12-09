@@ -9,7 +9,7 @@ const usuarioController = new UsuarioController();
 // Rotas do usuário
 routes.post('/login', usuarioController.login);
 routes.delete('/logout', usuarioController.logout);
-routes.get('/usuarios/:id', usuarioController.obter);
+routes.get('/usuarios/:id', usuarioController.obterPorId);
 
 
 module.exports = routes;
