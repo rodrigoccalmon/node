@@ -10,8 +10,12 @@ module.exports = class UsuarioDTO {
         this.email = obj.email;
         this.senha = obj.senha;
         this.perfil = obj.perfil && new PerfilDTO(obj.perfil);
+        this.idPerfil = obj.idPerfil;
         this.dataInativacao = obj.dataInativacao;
         this.criadoEm = obj.criadoEm;
         this.atualizadoEm = obj.atualizadoEm;
+    }
+    modeloValidoCadastro() {
+        return !!(this.email && this.senha && this.nome && this.idPerfil);
     }
 }

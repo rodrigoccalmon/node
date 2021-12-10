@@ -1,6 +1,6 @@
 const Usuario = require("../models/Usuario");
 const Perfil = require("../models/Perfil");
-const { NaoAutorizadoErro, NaoEncontradoErro } = require("../erros/typeErros");
+const { NaoAutorizadoErro, NaoEncontradoErro, AplicacaoErro } = require("../erros/typeErros");
 const geradorToken = require("../utils/geradorToken");
 const usuarioCache = require("../cache/usuarioCache");
 const UsuarioDTO = require("../dtos/UsuarioDTO");
@@ -71,9 +71,20 @@ async function validarAutenticacao(token) {
   }
   return true;
 }
+async function cadastrar(usuarioDTO){
+  let usuario = await Usuario.create(usuarioDTO);
+  if(!usuario) {
+    throw new AplicacaoErro(500, 'Falha ao cadastrar o usuário. ')
+  }
+
+  return new UsuarioDTO(usuario);
+
+}
+
 module.exports = {
   validarUsuario,
   logout,
   obterPorId,
   validarAutenticacao,
+  cadastrar
 };

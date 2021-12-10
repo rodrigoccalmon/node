@@ -12,7 +12,7 @@ routes.use(async (req, res, next) => {
     const { authorization } = req.headers;
     let autenticado = await usuarioService.validarAutenticacao(authorization)
 
-    if(!autenticado) {
+    if(!autenticado && req.originalUrl != '/login') {
         return res.status(401).json({ 
             status:  401,
             message: 'Usuário não autenticado',
@@ -25,6 +25,7 @@ routes.use(async (req, res, next) => {
 routes.post('/login', usuarioController.login);
 routes.delete('/logout', usuarioController.logout);
 routes.get('/usuarios/:id', usuarioController.obterPorId);
+routes.post("/usuarios", usuarioController.cadastrar);
 
 
 module.exports = routes;

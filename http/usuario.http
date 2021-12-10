@@ -8,9 +8,20 @@ Content-Type: application/json
 ###
 
 DELETE HTTP://localhost:3000/logout
-Authorization: 07b5db3d8eb531237709ac967a39ae8b
+Authorization: 
 
 ###
 
 GET HTTP://localhost:3000/usuarios/1
+Authorization: 
 
+###
+POST HTTP://localhost:3000/usuarios/
+Content-Type: application/json
+Authorization: 
+{
+    "nome": "Teste",
+    "email": "teste@gmail.com",
+    "senha": "123456",
+    "idPerfil": 1
+}
