@@ -46,11 +46,14 @@ function _criarCredencial(usuario) {
 async function logout(token) {
   usuarioCache.removerNoCache(token);
 }
-async function obterPorId(id){
-  let usuario = await Usuario.findByPk(id)
+async function obterPorId(id) {
+  let usuario = await Usuario.findByPk(id);
 
-  if(!usuario) {
-    throw new NaoEncontradoErro(404, "Não foi possível encontrar o usuário pelo id" + id);
+  if (!usuario) {
+    throw new NaoEncontradoErro(
+      404,
+      "Não foi possível encontrar o usuário pelo id" + id
+    );
   }
   usuario.senha = undefined;
   let usuarioDTO = new UsuarioDTO(usuario);
@@ -58,9 +61,19 @@ async function obterPorId(id){
   usuarioDTO.perfil = new PerfilDTO(perfil);
   return usuario;
 }
-
+async function validarAutenticacao(token) {
+  let credencial = usuarioCache.obterCredencial(token);
+  if (!credencial || credencial.dataExpiracao < new Date()) {
+    if (credencial) {
+      usuarioCache.removerNoCache(credencial.token);
+    }
+    return false;
+  }
+  return true;
+}
 module.exports = {
   validarUsuario,
   logout,
-  obterPorId
+  obterPorId,
+  validarAutenticacao,
 };
