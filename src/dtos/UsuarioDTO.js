@@ -19,7 +19,7 @@ module.exports = class UsuarioDTO {
     modeloValidoCadastro() {
         let validacao = !!(this.email && this.nome && this.idPerfil);
         if(!validacao){
-            throw new ModeloInvalidoErro(400, "os campos nome, email, senha e id perfil são obrigatórios. ")
+            throw new ModeloInvalidoErro(400, "os campos nome, email e id perfil são obrigatórios. ")
         }
     }
 

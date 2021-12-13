@@ -84,7 +84,12 @@ async function cadastrar(usuarioDTO) {
   return new UsuarioDTO(usuario);
 }
 async function atualizar(usuarioDTO) {
-  let usuario = await Usuario.update(usuarioDTO, {
+  let usuario = await Usuario.findByPk(usuarioDTO.id);
+  if (!usuario) {
+    throw new NaoEncontradoErro(404, "Usuário não localizado");
+  }
+  usuarioDTO.senha = usuario.senha;
+  usuario = await Usuario.update(usuarioDTO, {
     where: { id: usuarioDTO.id },
   });
 
@@ -94,6 +99,7 @@ async function atualizar(usuarioDTO) {
       "Falha ao atualizar o usuário com id:  " + usuarioDTO.id
     );
   }
+  usuarioDTO.senha = undefined;
   return usuarioDTO;
 }
 
