@@ -42,16 +42,31 @@ class UsuarioController {
   }
   async cadastrar(req, res) {
     try {
-      let usuarioDTO = new UsuarioDTO(req.body)
+      let usuarioDTO = new UsuarioDTO(req.body);
       usuarioDTO.modeloValidoCadastro();
       let usuarioCadastrado = await usuarioService.cadastrar(usuarioDTO);
       return res.json(usuarioCadastrado);
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-  atualizar(req, res) {}
+  atualizar(req, res) {
+    const { id } = req.params;
+    try {
+      if (!id) {
+        throw new ModeloInvalidoErro(
+          400,
+          "O Id é obrigatório para obter o usuário. "
+        );
+      }
+      let usuarioDTO = new UsuarioDTO(req.body);
+      usuarioDTO.modeloValidoCadastro();
+      let usuarioAtualizado = await usuarioService.atualizar(usuarioDTO);
+      return res.json(usuarioAtualizado);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   inativar(req, res) {}
 }
 
