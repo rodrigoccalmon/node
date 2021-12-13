@@ -1,5 +1,6 @@
 //Classe que vai ter toda lógica de como funciona o usuário dentro da aplicação
 
+const { ModeloInvalidoErro } = require("../erros/typeErros");
 const PerfilDTO = require("./PerfilDTO");
 
 module.exports = class UsuarioDTO {
@@ -16,6 +17,9 @@ module.exports = class UsuarioDTO {
         this.atualizadoEm = obj.atualizadoEm;
     }
     modeloValidoCadastro() {
-        return !!(this.email && this.senha && this.nome && this.idPerfil);
+        let validacao = !!(this.email && this.senha && this.nome && this.idPerfil);
+        if(!validacao){
+            throw new ModeloInvalidoErro(400, "os campos nome, email, senha e id perfil são obrigatórios. ")
+        }
     }
 }
