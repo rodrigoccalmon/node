@@ -60,7 +60,9 @@ class UsuarioController {
         );
       }
       let usuarioDTO = new UsuarioDTO(req.body);
-      usuarioDTO.modeloValidoCadastro();
+      usuarioDTO.id = id;
+      usuarioDTO.modeloValidoAtualizacao();
+
       let usuarioAtualizado = await usuarioService.atualizar(usuarioDTO);
       return res.json(usuarioAtualizado);
     } catch (error) {
