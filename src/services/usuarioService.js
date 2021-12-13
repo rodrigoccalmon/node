@@ -84,6 +84,7 @@ async function cadastrar(usuarioDTO) {
 
   let dto = new UsuarioDTO(usuario);
   dto.senha = undefined;
+  dto.perfil = new PerfilDTO(await Perfil.findByPk(dto.idPerfil));
 }
 async function atualizar(usuarioDTO) {
   let usuario = await Usuario.findByPk(usuarioDTO.id);

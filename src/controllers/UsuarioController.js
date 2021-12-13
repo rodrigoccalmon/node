@@ -63,7 +63,7 @@ class UsuarioController {
       usuarioDTO.id = parseInt(id);
       usuarioDTO.modeloValidoAtualizacao();
 
-      let usuarioAtualizado = await usuarioService.atualizar(usuarioDTO);
+      //let usuarioAtualizado = await usuarioService.atualizar(usuarioDTO);
       return res.json(usuarioAtualizado);
     } catch (error) {
       console.log(error);
