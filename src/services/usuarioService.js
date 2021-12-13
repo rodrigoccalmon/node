@@ -76,12 +76,14 @@ async function validarAutenticacao(token) {
   return true;
 }
 async function cadastrar(usuarioDTO) {
+  usuarioDTO.senha = geradorToken.gerarHashDaSenha(senha);
   let usuario = await Usuario.create(usuarioDTO);
   if (!usuario) {
     throw new AplicacaoErro(500, "Falha ao cadastrar o usuário. ");
   }
 
-  return new UsuarioDTO(usuario);
+  let dto = new UsuarioDTO(usuario);
+  dto.senha = undefined;
 }
 async function atualizar(usuarioDTO) {
   let usuario = await Usuario.findByPk(usuarioDTO.id);
